@@ -1,29 +1,37 @@
 package SecretSanta;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class BaseClass {
+	/**
+	 * 
+	 * @param args
+	 * @throws IOException
+	 * Create random number
+	 * take random number element from array
+	 * 
+	 */
 
-	public static void main(String[] args) {
-		addParticipants();
+	public static void main(String[] args) throws IOException {
+	Names name = new Names();
+		Pairings pairings = new Pairings();
+		
+		System.out.println(name.getNames());
+		System.out.println(pairings.getPairings());
+		
+	
+	
 
 	}
 	
-	public static void addParticipants() {
-		System.out.println("Add participants. Type done when you're finished");
-		Scanner input = new Scanner(System.in);
-		String names = input.nextLine();
-		
-		ArrayList <String> participants = new ArrayList <String>();
-		
-		while(names != "done"){
-			
-			participants.add(names);
-				
+	
 		}
+	
 		
-		System.out.println(participants);
-	}
+		
+	
 
-}
+
