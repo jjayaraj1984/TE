@@ -18,15 +18,29 @@ public class Names {
 		while((line = br.readLine())!=null){
 			
 			String [] r = line.split(",");
-			
+		
 			for(int i=0; i<r.length; i++) {
 		String nameValue = String.valueOf(r[i]);
 		names.add(nameValue);
+		
 			}
-			
-			
-		}br.close();
+			}br.close();
+		
+		
 		return names;
 		
+	}
+	
+	private boolean checkDuplicateNames( ArrayList <String> names )
+	{
+	    for( int i = 0; i < names.size(); ++i )
+	    {
+	        for( int j = i + 1; j < names.size(); ++j )
+	        {
+	            if( names.get(i).toString().equals(names.get(j).toString()))
+	                return true;
+	        }
+	    }
+	    return false;
 	}
 }

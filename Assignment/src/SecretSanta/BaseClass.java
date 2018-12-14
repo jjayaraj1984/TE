@@ -15,10 +15,10 @@ public class BaseClass {
 	 */
 
 	public static void main(String[] args) throws IOException {
-		Names name = new Names();
+		
 		Pairings pairings = new Pairings();
 
-		System.out.println(name.getNames());
+		
 		System.out.println("The 2018 Secret Santa pairings: " + pairings.getPairings());
 
 	}

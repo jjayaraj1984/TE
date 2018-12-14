@@ -45,5 +45,9 @@ public class Pairings {
 		}
 		return false;
 	}
+	
+	/**
+	 * Create a two dimensional array
+	 */
 
 }
