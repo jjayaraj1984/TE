@@ -8,8 +8,8 @@ import java.util.ArrayList;
 
 public class Names {
 	
-	public ArrayList <String> getNames() throws IOException{
-		BufferedReader br = new BufferedReader(new FileReader("Resources/Names.txt"));
+	public ArrayList <String> getNames(String filename) throws IOException{
+		BufferedReader br = new BufferedReader(new FileReader(filename));
 		
 		ArrayList <String> names = new ArrayList <String>();
 		
@@ -18,10 +18,11 @@ public class Names {
 		while((line = br.readLine())!=null){
 			
 			String [] r = line.split(",");
-		
-			for(int i=0; i<r.length; i++) {
-		String nameValue = String.valueOf(r[i]);
-		names.add(nameValue);
+			
+			for(int i=0; i<r.length; i++) 
+			{
+				String nameValue = String.valueOf(r[i]);
+				names.add(nameValue.replaceAll("\\s+",""));
 		
 			}
 			}br.close();

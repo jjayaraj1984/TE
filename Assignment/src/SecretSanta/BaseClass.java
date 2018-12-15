@@ -15,12 +15,9 @@ public class BaseClass {
 	 */
 
 	public static void main(String[] args) throws IOException {
-		
+			
 		Pairings pairings = new Pairings();
-
-		
-		System.out.println("The 2018 Secret Santa pairings: " + pairings.getPairings());
-
-	}
+		pairings.getPairings();
+		}
 
 }
