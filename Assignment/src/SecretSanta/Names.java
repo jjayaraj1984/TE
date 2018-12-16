@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+//Use this class to read names from files(Families.txt,Names.txt, and ThreeYears.txt
 
 public class Names {
 	
