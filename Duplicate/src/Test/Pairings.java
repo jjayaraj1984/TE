@@ -12,9 +12,14 @@ import java.util.Map.Entry;
 public class Pairings extends StorePairings {
 	Names names = new Names();
 
-	// Secret Santa Part 1
+	/*
+	 * Secret Santa
+	 * getPairings() is called from BaseClass main class
+	 * 
+	 */
+	
 	public void getPairings() throws IOException {
-
+		System.out.println("hi world");
 		ArrayList<String> originalList = new ArrayList<String>(names.getNames("Resources/Names.txt"));
 		ArrayList<Integer> shuffledNumberList = new ArrayList<Integer>(originalList.size());
 		Boolean[][] FlagMatrix = new Boolean[originalList.size()][originalList.size()];
