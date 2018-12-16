@@ -11,37 +11,41 @@ public class Pairings {
 	Names names = new Names();
 
 	/*
-	 * Secret Santa
-	 * getPairings() is called from BaseClass main
+	 * Secret Santa getPairings() is called from BaseClass main
 	 * 
 	 */
 	public void getPairings() throws IOException {
 		ArrayList<String> originalList = new ArrayList<String>(names.getNames("Resources/Names.txt"));
 		ArrayList<Integer> shuffledNumberList = new ArrayList<Integer>(originalList.size());
 		Boolean[][] FlagMatrix = new Boolean[originalList.size()][originalList.size()];
-		//FlagMmatrix is a matrix which has both rows and columns as indexes of the names in Names.txt
-		//Its elements represent ALL constraints of which name index is allowed to be assigned to which name index.
-		
+		// FlagMmatrix is a matrix which has both rows and columns as indexes of the
+		// names in Names.txt
+		// Its elements represent ALL constraints of which name index is allowed to be
+		// assigned to which name index.
+
 		for (int i = 0; i < originalList.size(); i++) {
 			shuffledNumberList.add(i);
 		}
 
-		System.out.println("Choose an assignment method: 1, for random selection, 2 for three years, and 3 for families");
+		System.out
+				.println("Choose an assignment method: 1, for random selection, 2 for three years, and 3 for families");
 		Scanner input = new Scanner(System.in);
 		int option = input.nextInt();
-		
-		switch(option) {
+
+		switch (option) {
 		case 1:
-			System.out.println("Generic random pairing"); //case1: Only constraint is that a person cannot be assigned to themself
-			FlagMatrix = AssignMatrix1();	
+			System.out.println("Generic random pairing"); // case1: Only constraint is that a person cannot be assigned
+															// to themself
+			FlagMatrix = AssignMatrix1();
 			break;
 		case 2:
 			System.out.println("Different pairings every 3 years"); // case 2 also has constraints of case 1.
-																	
+
 			FlagMatrix = AssignMatrix2();
 			break;
 		case 3:
-			System.out.println("Immediate family members are not assigned to each other"); // case 3 also has constraints of case 2.
+			System.out.println("Immediate family members are not assigned to each other"); // case 3 also has
+																							// constraints of case 2.
 			Boolean[][] FlagFamily = new Boolean[originalList.size()][originalList.size()];
 			FlagFamily = getFamilies(originalList);
 			FlagMatrix = AssignMatrix3(FlagFamily);
@@ -60,9 +64,10 @@ public class Pairings {
 
 	}
 
-	/* AssignMatrix1() assigns a matrix of size = number of names in the secret santa exchange
-	 * This FlagMatrix is populated to ensure that each person
-	 * is not assigned to him/herself
+	/*
+	 * AssignMatrix1() assigns a matrix of size = number of names in the secret
+	 * santa exchange This FlagMatrix is populated to ensure that each person is not
+	 * assigned to him/herself
 	 */
 	private Boolean[][] AssignMatrix1() throws IOException {
 		ArrayList<String> originalList = new ArrayList<String>(names.getNames("Resources/Names.txt"));
@@ -83,9 +88,9 @@ public class Pairings {
 
 	}
 
-	/* AssignMatrix2()
-	 * Assigns FlagMatrix with elements populated by marking a past assignment
-	 * declared in ThreeYears.txt with a 'false'
+	/*
+	 * AssignMatrix2() Assigns FlagMatrix with elements populated by marking a past
+	 * assignment declared in ThreeYears.txt with a 'false'
 	 */
 	private Boolean[][] AssignMatrix2() throws IOException {
 		ArrayList<String> originalList = new ArrayList<String>(names.getNames("Resources/Names.txt"));
@@ -111,11 +116,11 @@ public class Pairings {
 
 	}
 
-	/* getFamilies uses Families.txt
-	 * Outputs a matrix which has each row as a family with members according to the index of the columns
-	 * The element is true if that name is in that particular family and false if not 
-	 * part of that family
-	 * 	 
+	/*
+	 * getFamilies uses Families.txt Outputs a matrix which has each row as a family
+	 * with members according to the index of the columns The element is true if
+	 * that name is in that particular family and false if not part of that family
+	 * 
 	 */
 	public Boolean[][] getFamilies(ArrayList<String> originalList) throws IOException {
 		BufferedReader br = new BufferedReader(new FileReader("Resources/Families.txt"));
@@ -146,11 +151,13 @@ public class Pairings {
 		return FlagFamily;
 
 	}
-	
-		/* AssignMatrix3() uses FlagFamily which is output from getFamilies() using Families.txt
-		 * Assigns FlagMatrix so that immediate members of the family will not be assigned each other
-		 */
-		private Boolean[][] AssignMatrix3(Boolean[][] FlagFamily) throws IOException {
+
+	/*
+	 * AssignMatrix3() uses FlagFamily which is output from getFamilies() using
+	 * Families.txt Assigns FlagMatrix so that immediate members of the family will
+	 * not be assigned each other
+	 */
+	private Boolean[][] AssignMatrix3(Boolean[][] FlagFamily) throws IOException {
 
 		ArrayList<String> originalList = new ArrayList<String>(names.getNames("Resources/Names.txt"));
 		Boolean[][] FlagMatrix = new Boolean[originalList.size()][originalList.size()];
@@ -175,13 +182,13 @@ public class Pairings {
 		}
 
 		return FlagMatrix;
-
 	}
 
-		/*
-		 * Checks against the constraint matrix. If any constraint is broken, it returns a value of false and the names will be reshuffled.
-		 */
-		private boolean CheckAgainstMatrix(Boolean[][] FlagMatrix, ArrayList<Integer> shuffledNumberList)
+	/*
+	 * Checks against the constraint matrix. If any constraint is broken, it returns
+	 * a value of false and the names will be reshuffled.
+	 */
+	private boolean CheckAgainstMatrix(Boolean[][] FlagMatrix, ArrayList<Integer> shuffledNumberList)
 			throws IOException {
 
 		int i;
@@ -190,12 +197,7 @@ public class Pairings {
 			if (FlagMatrix[i][shuffledNumberList.get(i)] == false) {
 				return false;
 			}
-
 		}
 		return true;
-
 	}
-		
-		
-
 }
