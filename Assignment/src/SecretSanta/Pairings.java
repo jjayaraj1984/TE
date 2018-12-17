@@ -11,7 +11,7 @@ public class Pairings {
 	Names names = new Names();
 
 	/*
-	 * Secret Santa getPairings() is called from BaseClass main
+	 * The getPairings method is being called from BaseClass main. 
 	 * 
 	 */
 	public void getPairings() throws IOException {
@@ -53,13 +53,20 @@ public class Pairings {
 		default:
 			System.out.println("Not a valid selection");
 		}
-
+		
+		if (CheckOverConstraint(FlagMatrix, originalList) == true)
+		{
+			System.out.println("Please reduce the constraints. There is no possible solution");
+		}
+		else
+		{
 		do {
 			Collections.shuffle(shuffledNumberList);
 		} while (!CheckAgainstMatrix(FlagMatrix, shuffledNumberList));
 
 		for (int i = 0; i < originalList.size(); i++) {
 			System.out.println(originalList.get(i) + " ," + originalList.get(shuffledNumberList.get(i)));
+		}
 		}
 
 	}
@@ -184,6 +191,50 @@ public class Pairings {
 		return FlagMatrix;
 	}
 
+	/*
+	 * Checks the FlagMatrix to see if there is atleast one possible solution. 
+	 * This is done by checking every row and column of FlagMatrix
+	 * If there is no possible solution, it returns a value of true
+	 * and prompts the user to reduce the constraints.
+	 */
+	
+	private boolean CheckOverConstraint(Boolean[][] FlagMatrix, ArrayList<String> originalList)
+			throws IOException {
+
+		int i,j;
+		Boolean sumRow[] = new Boolean[originalList.size()];
+		Boolean sumColumn[] = new Boolean[originalList.size()];
+		
+		for (i = 0; i < originalList.size(); i++) {
+			sumRow[i] = false;				
+			sumColumn[i] = false;
+		}
+
+		for (i = 0; i < originalList.size(); i++) {
+			for (j = 0; j < originalList.size(); j++)
+			{
+				if (FlagMatrix[i][j]==true)
+						{
+							sumRow[i] = true;
+						}
+				if (FlagMatrix[j][i]==true)
+						{
+							sumColumn[i] = true;
+						}
+			}
+		}
+
+		
+		for (i = 0; i < originalList.size(); i++)
+		{
+			if ((sumRow[i] == false) || (sumColumn[i] == false))
+				{
+				return true;	//there is atleast one row or column which has no possibility of being assigned
+				}
+		}
+		return false;
+	}
+	
 	/*
 	 * Checks against the constraint matrix. If any constraint is broken, it returns
 	 * a value of false and the names will be reshuffled.
